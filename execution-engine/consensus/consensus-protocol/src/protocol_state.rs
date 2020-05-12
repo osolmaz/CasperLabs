@@ -10,12 +10,12 @@ pub(crate) trait Vertex<C, Id> {
 }
 
 pub(crate) trait ProtocolState<Ctx: ConsensusContext> {
-    type VId: VertexId + Hash + PartialEq + Eq;
-    type V: Vertex<Ctx::ConsensusValue, Self::VId>;
+    type VertexId;
+    type Vertex;
 
     type Error;
 
-    fn add_vertex(&mut self, v: Self::V) -> Result<Option<Self::VId>, Self::Error>;
+    fn add_vertex(&mut self, v: Self::Vertex) -> Result<Option<Self::VertexId>, Self::Error>;
 
-    fn get_vertex(&self, v: Self::VId) -> Result<Option<Self::V>, Self::Error>;
+    fn get_vertex(&self, v: Self::VertexId) -> Result<Option<Self::Vertex>, Self::Error>;
 }
